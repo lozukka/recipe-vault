@@ -1,5 +1,11 @@
+import { Check } from "lucide-react";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <Check />
+    </>
+  );
 }
 
 export default App;
