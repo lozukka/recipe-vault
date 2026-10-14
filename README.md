@@ -1,16 +1,51 @@
-# React + Vite
+# Recipe Vault
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Currently working on this!
 
-Currently, two official plugins are available:
+A personal recipe manager that pulls your saved recipes from anywhere into one searchable, tagged collection. With weekly meal planning built with.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features:
 
-## React Compiler
+Save - paste URL or type in recipe manually: title, ingredients, source link, modified versions ingredients, how many meals one recipe contains.
+Tag & filter - add tags like #pasta, filter by tags, search by name or ingredient.
+Plan - a simple weekly meal planner. Drag recipe into a day, generate a combined grocery list from week’s meals.
+Find - works across titles, ingredients and tags (this solves the cone pain)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Roadmap:
 
-## Expanding the Oxlint configuration
+v1: manual saves, tag, edit and delete recipes
+Done when: I have added recipes, I can search, edit, delete them and the logic works
+v1.1.: weekly planner with Add-button, list lastCookedAt
+Done when: I can filter with lastCookedAt, I have made one weekly plan with the app
+v1.2: grocery list
+Done when: I can generate a grocery list with the app after planning the weekly menu
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+v2: drag and drop weekly planner, real backend
+
+In the future: URL import, empty states
+
+## Decisions:
+
+-using localstorage + JSON export/import, wrap storage in a small module or custom hook so swapping later doesn’t touch components
+-ingredient data model:
+recipe: {id, title, sourceURL, mealsQty, ingredients: [], modifiedIngredients: [], tags: [], createdAt, lastCookedAt}
+ingredients: {quantity: 2, unit: “dl”, name: “kerma”} - quantity and unit optional
+modifiedIngredients: { quantity, unit, name, note } - quantity, unit and note optional
+-unit list: l, dl, rkl, tl, g, kg, kpl
+-id: crypto.randomUUID() - or something like that
+-quantities must accept comma on input
+-lastCookedAt (a date, I can filter recipes that I haven’t cooked in a while)
+
+```
+recipe: {
+    id,
+    title,
+    sourceURL,
+    mealsQty,
+    ingredients: [{quantity(optional), unit(optional), name}],
+    modifiedIngredients: [{quantity(optional), unit(optional), name, note(optional)}],
+    tags: [],
+    createdAt,
+    lastCookedAt
+}
+```
