@@ -6,10 +6,10 @@ A personal recipe manager that pulls your saved recipes from anywhere into one s
 
 ## Features:
 
-Save - paste URL or type in recipe manually: title, ingredients, source link, modified versions ingredients, how many meals one recipe contains.
-Tag & filter - add tags like #pasta, filter by tags, search by name or ingredient.
-Plan - a simple weekly meal planner. Drag recipe into a day, generate a combined grocery list from week’s meals.
-Find - works across titles, ingredients and tags (this solves the cone pain)
+- Save - paste URL or type in recipe manually: title, ingredients, source link, modified versions ingredients, how many meals one recipe contains.
+- Tag & filter - add tags like #pasta, filter by tags, search by name or ingredient.
+- Plan - a simple weekly meal planner. Drag recipe into a day, generate a combined grocery list from week’s meals.
+- Find - works across titles, ingredients and tags (this solves the cone pain)
 
 ## Roadmap:
 
