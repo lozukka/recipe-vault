@@ -4,14 +4,13 @@ function parseQuantity(input) {
   const trimmed = input.trim();
   if (trimmed === "") return null;
 
-  const pattern = /\d[.,]?\d/g; // your job: what does a valid quantity look like?
-  if (!pattern.test(trimmed)) return undefined;
+  // Only digits and at most one separator (comma or dot)
+  if (!/^\d*[.,]?\d*$/.test(trimmed)) return undefined;
+
+  // At least one digit, so "," and "." on their own are rejected
+  if (!/\d/.test(trimmed)) return undefined;
 
   return Number(trimmed.replace(",", "."));
 }
 
 export default parseQuantity;
-
-//
-// \d[.,]? [.,]|
-//[^a-zA-Z]+
