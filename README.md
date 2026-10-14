@@ -33,19 +33,32 @@ A personal recipe manager that pulls your saved recipes from anywhere into one s
 - modifiedIngredients: { quantity, unit, name, note } - quantity, unit and note optional
 - unit list: l, dl, rkl, tl, g, kg, kpl
 - id: crypto.randomUUID() - or something like that
+- createdAt and lastCookedAt: new Date().toISOString()
 - quantities must accept comma on input
+- tags example "pasta"
 - lastCookedAt (a date, I can filter recipes that I haven’t cooked in a while)
 
 ```
+non-optional marked with a *
+empty optional are null when missing a value
+automatical ones are marked with a #
+
 recipe: {
-    id,
-    title,
+    id#,
+    title*,
     sourceURL,
     mealsQty,
-    ingredients: [{quantity(optional), unit(optional), name}],
+    ingredients: [{quantity(optional), unit(optional), name*}],
     modifiedIngredients: [{quantity(optional), unit(optional), name, note(optional)}],
     tags: [],
-    createdAt,
+    createdAt#,
     lastCookedAt
-}
+},
+
+units: [l, dl, rkl, tl, g, kg, kpl]
+
+tags example "pasta", renders: pasta
+quantities must accept comma on input
+id: crypto.randomUUID()
+createdAt and lastCookedAt: new Date().toISOString()
 ```
