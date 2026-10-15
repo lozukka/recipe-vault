@@ -2,8 +2,8 @@
 //createRecipe
 //validateRecipe
 
-function createRecipe(fields) {
-  const recipe = {
+//function createRecipe(fields) {
+/**const recipe = {
     id: crypto.randomUUID(),
     title: fields.title,
     sourceURL: fields.sourceURL,
@@ -13,7 +13,11 @@ function createRecipe(fields) {
     tags: [],
     createdAt: new Date(year.monthIndex, day),
     lastCookedAt: new Date(year.monthIndex, day),
-  };
-}
+  };*/
+//}
 
-export default createRecipe;
+// export default createRecipe;
+
+function createIngredient() {}
+
+export default createIngredient;
