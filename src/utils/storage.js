@@ -14,16 +14,21 @@ const isValidStored = (stored) =>
   Array.isArray(stored.recipes);
 
 export const loadRecipes = () => {
-  const raw = localStorage.getItem(STORAGE_KEY);
-  if (raw === null) return [];
-
   try {
-    const stored = JSON.parse(raw);
-    if (isValidStored(stored)) return stored.recipes;
-  } catch {
-    // broken JSON: fall through to the cleanup below
-  }
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw === null) return [];
 
-  backupAndClear(raw);
-  return [];
+    try {
+      const stored = JSON.parse(raw);
+      if (isValidStored(stored)) return stored.recipes;
+    } catch {
+      // broken JSON: fall through to the cleanup below
+    }
+
+    backupAndClear(raw);
+    return [];
+  } catch {
+    // storage is unavailable (blocked or broken)
+    return [];
+  }
 };

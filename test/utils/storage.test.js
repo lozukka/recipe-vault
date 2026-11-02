@@ -1,10 +1,14 @@
-import { beforeEach, describe, expect, test } from "vitest";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { loadRecipes } from "../../src/utils/storage";
 import { createRecipe } from "../../src/utils/recipe";
 import { STORAGE_KEY, BACKUP_KEY, STORAGE_VERSION } from "../../src/constants";
 
 beforeEach(() => {
   localStorage.clear();
+});
+
+afterEach(() => {
+  vi.restoreAllMocks();
 });
 
 describe("loadRecipes", () => {
@@ -71,6 +75,26 @@ describe("loadRecipes", () => {
       expect(loadRecipes()).toStrictEqual([]);
       expect(localStorage.getItem(BACKUP_KEY)).toBe(raw);
       expect(localStorage.getItem(STORAGE_KEY)).toBeNull();
+    });
+  });
+
+  describe("localStorage throws", () => {
+    test("returns an empty array when reading from storage throws", () => {
+      vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
+        throw new Error("storage is blocked");
+      });
+
+      expect(loadRecipes()).toStrictEqual([]);
+    });
+
+    test("returns an empty array when the backup of corrupted data fails", () => {
+      localStorage.setItem(STORAGE_KEY, "{not json");
+      vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => {
+        throw new Error("storage is full");
+      });
+
+      expect(loadRecipes()).toStrictEqual([]);
+      expect(localStorage.getItem(STORAGE_KEY)).toBe("{not json");
     });
   });
 });
