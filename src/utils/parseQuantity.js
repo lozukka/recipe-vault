@@ -1,4 +1,4 @@
-function parseQuantity(input) {
+const parseQuantity = (input) => {
   if (typeof input !== "string") return undefined;
 
   const trimmed = input.trim();
@@ -11,6 +11,6 @@ function parseQuantity(input) {
   if (!/\d/.test(trimmed)) return undefined;
 
   return Number(trimmed.replace(",", "."));
-}
+};
 
 export default parseQuantity;

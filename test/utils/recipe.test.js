@@ -1,6 +1,5 @@
 import { describe, expect, test } from "vitest";
-// import createRecipe from "../../src/utils/recipe";
-import { createIngredient } from "../../src/utils/recipe";
+import { createIngredient, createRecipe } from "../../src/utils/recipe";
 import { createID } from "../../src/utils/recipe";
 import { createTimestamp } from "../../src/utils/recipe";
 
@@ -85,6 +84,54 @@ describe("createRecipe", () => {
       const time = new Date(result).getTime();
       expect(time).toBeGreaterThanOrEqual(before);
       expect(time).toBeLessThanOrEqual(after);
+    });
+  });
+  describe("create one recipe", () => {
+    test("title is trimmed", () => {
+      const result = createRecipe({
+        title: " Pasta ",
+        sourceURL: null,
+        mealsQty: 1,
+        ingredients: [],
+        modifiedIngredients: [],
+        tags: [],
+      });
+      expect(result).toStrictEqual({
+        id: expect.any(String),
+        title: "Pasta",
+        sourceURL: null,
+        mealsQty: 1,
+        ingredients: [],
+        modifiedIngredients: [],
+        tags: [],
+        createdAt: expect.any(String),
+        lastCookedAt: null,
+      });
+    });
+    test("full input", () => {
+      const result = createRecipe({
+        title: " Pasta ",
+        sourceURL: "Valio",
+        mealsQty: 3,
+        ingredients: [{ quantity: 2, unit: "dl", name: "kermaa" }],
+        modifiedIngredients: [
+          { quantity: 2, unit: "dl", name: "kermaa", note: null },
+        ],
+        tags: [],
+      });
+      expect(result).toStrictEqual({
+        id: expect.any(String),
+        title: "Pasta",
+        sourceURL: "Valio",
+        mealsQty: 3,
+        ingredients: [{ quantity: 2, unit: "dl", name: "kermaa" }],
+        modifiedIngredients: [
+          { quantity: 2, unit: "dl", name: "kermaa", note: null },
+        ],
+        tags: [],
+        createdAt: expect.any(String),
+        lastCookedAt: null,
+      });
     });
   });
 });
