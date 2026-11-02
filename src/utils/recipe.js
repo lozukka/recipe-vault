@@ -18,6 +18,14 @@
 
 // export default createRecipe;
 
-function createIngredient() {}
+export function createID() {
+  return crypto.randomUUID();
+}
 
-export default createIngredient;
+export function createIngredient({ quantity, unit, name }) {
+  return {
+    quantity: quantity ?? null,
+    unit: unit || null,
+    name: name.trim(),
+  };
+}
