@@ -31,4 +31,24 @@ describe("loadRecipes", () => {
       expect(result).toStrictEqual([]);
     });
   });
+  //move data to BACKUP_KEY and remove the original
+  describe("corrupted data tests", () => {
+    test("broken JSON returns empty array", () => {
+      localStorage.setItem(STORAGE_KEY, "{not json");
+
+      const result = loadRecipes();
+
+      expect(result).toStrictEqual([]);
+    });
+    test("broken JSON is saved to the backup key", () => {
+      localStorage.setItem(STORAGE_KEY, "{not json");
+      loadRecipes();
+      expect(localStorage.getItem(BACKUP_KEY)).toBe("{not json");
+    });
+    test("broken JSON is removed from the main key", () => {
+      localStorage.setItem(STORAGE_KEY, "{not json");
+      loadRecipes();
+      expect(localStorage.getItem(STORAGE_KEY)).toBeNull();
+    });
+  });
 });
