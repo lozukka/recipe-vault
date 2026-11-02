@@ -51,4 +51,26 @@ describe("loadRecipes", () => {
       expect(localStorage.getItem(STORAGE_KEY)).toBeNull();
     });
   });
+  // Rule: stored data that can't be read, or isn't exactly the shape and
+  // version we expect, is moved to BACKUP_KEY, removed from STORAGE_KEY,
+  // and loadRecipes returns [].
+  describe("valid JSON in the wrong shape", () => {
+    test.each([
+      ["missing recipes", JSON.stringify({ version: STORAGE_VERSION })],
+      [
+        "recipes not an array",
+        JSON.stringify({ version: STORAGE_VERSION, recipes: "oops" }),
+      ],
+      ["array instead of object", "[]"],
+      ["a number", "42"],
+      ["null", "null"],
+      ["wrong version", JSON.stringify({ version: 99, recipes: [] })],
+    ])("returns [] and backs up when stored data is %s", (_name, raw) => {
+      localStorage.setItem(STORAGE_KEY, raw);
+
+      expect(loadRecipes()).toStrictEqual([]);
+      expect(localStorage.getItem(BACKUP_KEY)).toBe(raw);
+      expect(localStorage.getItem(STORAGE_KEY)).toBeNull();
+    });
+  });
 });

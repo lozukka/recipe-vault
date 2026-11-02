@@ -13,14 +13,14 @@ A personal recipe manager that pulls your saved recipes from anywhere into one s
 
 ## Roadmap:
 
-- v1: manual saves, tag, edit and delete recipes
+- v1: manual saves, tag, edit and delete recipes (one localStorage)
   Done when: I have added recipes, I can search, edit, delete them and the logic works
 - v1.1.: weekly planner with Add-button, list lastCookedAt
   Done when: I can filter with lastCookedAt, I have made one weekly plan with the app
 - v1.2: grocery list
   Done when: I can generate a grocery list with the app after planning the weekly menu
 
-- v2: drag and drop weekly planner, real backend
+- v2: drag and drop weekly planner, real shareable backend
 
 - In the future: URL import, empty states
 
