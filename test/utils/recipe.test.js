@@ -2,6 +2,7 @@ import { describe, expect, test } from "vitest";
 // import createRecipe from "../../src/utils/recipe";
 import { createIngredient } from "../../src/utils/recipe";
 import { createID } from "../../src/utils/recipe";
+import { createTimestamp } from "../../src/utils/recipe";
 
 describe("createRecipe", () => {
   describe("createIngredient", () => {
@@ -69,6 +70,21 @@ describe("createRecipe", () => {
       const first = createID();
       const second = createID();
       expect(first).not.toBe(second);
+    });
+  });
+  describe("create a date", () => {
+    test("returns a valid ISO date string", () => {
+      const result = createTimestamp();
+      expect(new Date(result).toISOString()).toBe(result);
+    });
+    test("returns the current time", () => {
+      const before = Date.now();
+      const result = createTimestamp();
+      const after = Date.now();
+
+      const time = new Date(result).getTime();
+      expect(time).toBeGreaterThanOrEqual(before);
+      expect(time).toBeLessThanOrEqual(after);
     });
   });
 });

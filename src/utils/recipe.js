@@ -29,3 +29,7 @@ export function createIngredient({ quantity, unit, name }) {
     name: name.trim(),
   };
 }
+
+export function createTimestamp() {
+  return new Date().toISOString();
+}
