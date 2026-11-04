@@ -85,4 +85,14 @@ describe("recipesReducer", () => {
       expect(result).toStrictEqual(state);
     });
   });
+
+  describe("unknown action", () => {
+    test("throws an error for an unknown action type", () => {
+      const state = [];
+
+      expect(() => recipesReducer(state, { type: "nonsense" })).toThrow(
+        "Unknown action: nonsense",
+      );
+    });
+  });
 });
