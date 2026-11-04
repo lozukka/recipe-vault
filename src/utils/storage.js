@@ -1,5 +1,6 @@
 //loadRecipes
 //saveRecipes
+import { version } from "react";
 import { STORAGE_KEY, BACKUP_KEY, STORAGE_VERSION } from "../constants";
 
 const backupAndClear = (raw) => {
@@ -33,4 +34,10 @@ export const loadRecipes = () => {
   }
 };
 
-export const saveRecipes = () => {};
+export const saveRecipes = (recipes) => {
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify({ version: STORAGE_VERSION, recipes }),
+  );
+  return true;
+};
