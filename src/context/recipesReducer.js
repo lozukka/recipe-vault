@@ -11,10 +11,13 @@ export const recipesReducer = (state, action) => {
       return newRecipes;
     case "updated":
       // TODO: a new array where the recipe with a matching id is replaced
-      return recipes;
+
+      return recipes.map((recipe) =>
+        recipe.id === action.recipe.id ? action.recipe : recipe,
+      );
+
     case "deleted":
       // TODO: a new array without the recipe with that id
-
       return recipes.filter((recipe) => recipe.id !== action.id);
     default:
       throw new Error(`Unknown action: ${action.type}`);

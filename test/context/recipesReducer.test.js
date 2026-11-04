@@ -54,4 +54,35 @@ describe("recipesReducer", () => {
       expect(result).toStrictEqual(state);
     });
   });
+
+  describe("updated", () => {
+    test("replaces the recipe with the matching id and keeps the rest", () => {
+      const state = Object.freeze([
+        { id: "1", title: "Pasta" },
+        { id: "2", title: "Soup" },
+      ]);
+      const updated = { id: "2", title: "Tomato soup" };
+
+      const result = recipesReducer(state, {
+        type: "updated",
+        recipe: updated,
+      });
+
+      expect(result).toStrictEqual([
+        { id: "1", title: "Pasta" },
+        { id: "2", title: "Tomato soup" },
+      ]);
+    });
+
+    test("leaves the list unchanged when the id doesn't exist", () => {
+      const state = Object.freeze([{ id: "1", title: "Pasta" }]);
+
+      const result = recipesReducer(state, {
+        type: "updated",
+        recipe: { id: "9", title: "Pizza" },
+      });
+
+      expect(result).toStrictEqual(state);
+    });
+  });
 });
