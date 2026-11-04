@@ -114,10 +114,22 @@ describe("saveRecipes", () => {
     });
     test("saves an empty list", () => {
       const expected = { version: STORAGE_VERSION, recipes: [] };
+
       const result = saveRecipes([]);
+
       const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
       expect(stored).toStrictEqual(expected);
       expect(result).toBe(true);
+    });
+    test("overwrites earlier data", () => {
+      const first = createRecipe({ title: "Pasta" });
+      const second = createRecipe({ title: "Soup" });
+
+      saveRecipes([first]);
+      saveRecipes([second]);
+
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      expect(stored.recipes).toStrictEqual([second]);
     });
   });
 });
