@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { loadRecipes, saveRecipes } from "../../src/utils/storage";
 import { createRecipe } from "../../src/utils/recipe";
 import { STORAGE_KEY, BACKUP_KEY, STORAGE_VERSION } from "../../src/constants";
+import { version } from "react";
 
 beforeEach(() => {
   localStorage.clear();
@@ -107,6 +108,13 @@ describe("saveRecipes", () => {
 
       const result = saveRecipes([recipe]);
 
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      expect(stored).toStrictEqual(expected);
+      expect(result).toBe(true);
+    });
+    test("saves an empty list", () => {
+      const expected = { version: STORAGE_VERSION, recipes: [] };
+      const result = saveRecipes([]);
       const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
       expect(stored).toStrictEqual(expected);
       expect(result).toBe(true);
