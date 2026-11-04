@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { loadRecipes } from "../../src/utils/storage";
+import { loadRecipes, saveRecipes } from "../../src/utils/storage";
 import { createRecipe } from "../../src/utils/recipe";
 import { STORAGE_KEY, BACKUP_KEY, STORAGE_VERSION } from "../../src/constants";
 
@@ -95,6 +95,21 @@ describe("loadRecipes", () => {
 
       expect(loadRecipes()).toStrictEqual([]);
       expect(localStorage.getItem(STORAGE_KEY)).toBe("{not json");
+    });
+  });
+});
+
+describe("saveRecipes", () => {
+  describe("successful paths", () => {
+    test("writes the wrapper object", () => {
+      const recipe = createRecipe({ title: "Pasta" });
+      const expected = { version: STORAGE_VERSION, recipes: [recipe] };
+
+      const result = saveRecipes([recipe]);
+
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      expect(stored).toStrictEqual(expected);
+      expect(result).toBe(true);
     });
   });
 });

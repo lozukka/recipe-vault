@@ -32,3 +32,5 @@ export const loadRecipes = () => {
     return [];
   }
 };
+
+export const saveRecipes = () => {};
