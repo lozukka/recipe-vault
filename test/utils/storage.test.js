@@ -132,6 +132,17 @@ describe("saveRecipes", () => {
       expect(stored.recipes).toStrictEqual([second]);
     });
   });
+  describe("storage throws", () => {
+    test("returns false when storage throws", () => {
+      vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => {
+        throw new Error("storage is full");
+      });
+
+      const result = saveRecipes([createRecipe({ title: "Pasta" })]);
+
+      expect(result).toBe(false);
+    });
+  });
 });
 
 describe("save and load together", () => {

@@ -35,9 +35,13 @@ export const loadRecipes = () => {
 };
 
 export const saveRecipes = (recipes) => {
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify({ version: STORAGE_VERSION, recipes }),
-  );
-  return true;
+  try {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ version: STORAGE_VERSION, recipes }),
+    );
+    return true;
+  } catch {
+    return false;
+  }
 };
