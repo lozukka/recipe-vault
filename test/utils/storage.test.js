@@ -133,3 +133,17 @@ describe("saveRecipes", () => {
     });
   });
 });
+
+describe("save and load together", () => {
+  test("loads what was saved", () => {
+    const recipe = createRecipe({
+      title: "Pasta",
+      ingredients: [{ quantity: 2, unit: "dl", name: "kerma" }],
+      tags: ["pasta"],
+    });
+
+    saveRecipes([recipe]);
+
+    expect(loadRecipes()).toStrictEqual([recipe]);
+  });
+});
