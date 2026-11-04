@@ -42,6 +42,7 @@ export const saveRecipes = (recipes) => {
     );
     return true;
   } catch {
+    //storage is unavailable (blocked or broken)
     return false;
   }
 };
