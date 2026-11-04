@@ -24,41 +24,32 @@ A personal recipe manager that pulls your saved recipes from anywhere into one s
 
 - In the future: URL import, empty states
 
-## Decisions:
+## Decisions
 
-- using localstorage + JSON export/import, wrap storage in a small module or custom hook so swapping later doesn’t touch components
-- ingredient data model:
-  recipe: {id, title, sourceURL, mealsQty, ingredients: [], modifiedIngredients: [], tags: [], createdAt, lastCookedAt}
-- ingredients: {quantity: 2, unit: “dl”, name: “kerma”} - quantity and unit optional
-- modifiedIngredients: { quantity, unit, name, note } - quantity, unit and note optional
-- unit list: l, dl, rkl, tl, g, kg, kpl
-- id: crypto.randomUUID() - or something like that
-- createdAt and lastCookedAt: new Date().toISOString()
-- quantities must accept comma on input
-- tags example "pasta"
-- lastCookedAt (a date, I can filter recipes that I haven’t cooked in a while)
+### Storage
 
-```
-non-optional marked with a *
-empty optional are null when missing a value
-automatical ones are marked with a #
+- **V1 uses `localStorage` in a single browser.** Recipes live on one device. V2 adds a backend so recipes can be shared between devices and users.
+- **Storage is wrapped in a small module** (`loadRecipes` / `saveRecipes`), so swapping to a backend later doesn't touch the components.
+- **Data is stored as `{ version, recipes }`.** The version number makes it possible to migrate the data format later.
+- **Corrupted or unrecognized data is backed up, not deleted.** If the stored data can't be parsed or has the wrong shape or version, it is copied to a backup key before the main key is cleared, and the app starts with an empty list.
+- **Storage failures never crash the app.** If `localStorage` is blocked or full, loading returns an empty list and saving returns `false`.
+- **JSON export/import** (planned) so data is never trapped in one browser.
 
-recipe: {
-    id#,
-    title*,
-    sourceURL,
-    mealsQty,
-    ingredients: [{quantity(optional), unit(optional), name*}],
-    modifiedIngredients: [{quantity(optional), unit(optional), name, note(optional)}],
-    tags: [],
-    createdAt#,
-    lastCookedAt
-},
+### Data model
 
-units: [l, dl, rkl, tl, g, kg, kpl]
+- **Recipe:** `{ id, title, sourceURL, mealsQty, ingredients, modifiedIngredients, tags, createdAt, lastCookedAt }`
+- **Ingredient:** `{ quantity, unit, name }`. Quantity and unit are optional, so "salt to taste" works. Quantity and unit are separate fields, so a grocery list can add amounts together later.
+- **Modified ingredient:** `{ quantity, unit, name, note }`, where `note` is optional. These are optional additions or swaps ("add bacon", "feta instead of cheese") kept on the same recipe, so there is one makaroonilaatikko and not three nearly identical ones.
+- **Missing optional values are `null`**, so every stored object has the same shape.
+- **`mealsQty` defaults to `1`**, so the planner and grocery list never have to handle an unknown number of meals.
+- **`lastCookedAt` is `null` until a recipe is cooked.** It makes it possible to find recipes I haven't cooked in a while.
+- **Unit list:** `l`, `dl`, `rkl`, `tl`, `g`, `kg`, `kpl`, chosen from a dropdown with an empty option.
+- **Tags** are stored in plain lowercase form, such as `"pasta"`, with the `#` added only when displayed. (Normalization is planned for the tag input.)
 
-tags example "pasta", renders: pasta
-quantities must accept comma on input
-id: crypto.randomUUID()
-createdAt and lastCookedAt: new Date().toISOString()
-```
+### Values and parsing
+
+- **IDs:** `crypto.randomUUID()`.
+- **Dates:** `createdAt` and `lastCookedAt` are ISO strings (`new Date().toISOString()`), because they survive JSON storage and sort correctly.
+- **Quantities accept a decimal comma** (`0,5`), as is natural in Finnish. `parseQuantity` returns a number, `null` for empty input, or `undefined` for invalid input, including non-strings.
+- **A quantity of `0` is valid**, for modified ingredients like "0 g bacon, note: remove this".
+- **Clean data at the edges.** Form input is parsed and normalized before it enters the app, so the rest of the code can rely on its shape.
