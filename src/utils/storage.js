@@ -1,6 +1,5 @@
 //loadRecipes
 //saveRecipes
-import { version } from "react";
 import { STORAGE_KEY, BACKUP_KEY, STORAGE_VERSION } from "../constants";
 
 const backupAndClear = (raw) => {
