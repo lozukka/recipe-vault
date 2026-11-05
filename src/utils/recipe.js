@@ -46,7 +46,7 @@ export const createTimestamp = () => {
 export const createRecipe = (fields) => {
   const newRecipe = {
     id: createID(),
-    title: fields.title.trim(),
+    title: (fields.title || "").trim(),
     sourceURL: fields.sourceURL || null,
     mealsQty: fields.mealsQty ?? 1,
     ingredients: (fields.ingredients ?? []).map(createIngredient),
