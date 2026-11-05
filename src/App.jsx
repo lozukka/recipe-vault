@@ -1,3 +1,3 @@
-const App = () => <h1>hello</h1>;
+function App() {}
 
 export default App;

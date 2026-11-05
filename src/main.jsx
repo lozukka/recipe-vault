@@ -8,6 +8,8 @@ import { GlobalStyle } from "./styles/GlobalStyle.js";
 import RecipeListPage from "./pages/RecipeListPage.jsx";
 import RecipeFormPage from "./pages/RecipeFormPage.jsx";
 import RecipeDetailPage from "./pages/RecipeDetailPage.jsx";
+import { RecipesProvider } from "./context/RecipesProvider.jsx";
+import { RecipesContext } from "./context/RecipesContext.js";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +25,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <ThemeProvider theme={theme}>
     <StrictMode>
-      <RouterProvider router={router} />
+      <RecipesProvider>
+        <RouterProvider router={router} />
+      </RecipesProvider>
     </StrictMode>
   </ThemeProvider>,
 );
