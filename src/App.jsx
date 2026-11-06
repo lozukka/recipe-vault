@@ -3,12 +3,18 @@ import { sampleRecipes } from "./data/sampleRecipes";
 
 function App() {
   const { recipes, addRecipe, updateRecipe, deleteRecipe } = useRecipes();
+
   return (
     <>
-      <button onClick={() => addRecipe(sampleRecipes.makaroonilaatikko)}>
-        Add test data
-      </button>
+      {import.meta.env.DEV && (
+        <button
+          onClick={() => sampleRecipes.forEach((recipe) => addRecipe(recipe))}
+        >
+          Load sample recipes
+        </button>
+      )}
       <div>
+        <p>Recipes: {recipes.length}</p>
         {recipes.map((recipe) => (
           <li key={recipe.id}>
             {recipe.title}{" "}

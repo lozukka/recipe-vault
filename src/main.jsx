@@ -9,7 +9,6 @@ import RecipeListPage from "./pages/RecipeListPage.jsx";
 import RecipeFormPage from "./pages/RecipeFormPage.jsx";
 import RecipeDetailPage from "./pages/RecipeDetailPage.jsx";
 import { RecipesProvider } from "./context/RecipesProvider.jsx";
-import { RecipesContext } from "./context/RecipesContext.js";
 
 const router = createBrowserRouter([
   {
