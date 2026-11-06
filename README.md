@@ -53,3 +53,9 @@ A personal recipe manager that pulls your saved recipes from anywhere into one s
 - **Quantities accept a decimal comma** (`0,5`), as is natural in Finnish. `parseQuantity` returns a number, `null` for empty input, or `undefined` for invalid input, including non-strings.
 - **A quantity of `0` is valid**, for modified ingredients like "0 g bacon, note: remove this".
 - **Clean data at the edges.** Form input is parsed and normalized before it enters the app, so the rest of the code can rely on its shape.
+
+### Provider, reducer and persistence
+
+- **useEffect:** Saving is a useEffect in the provider, so the reducer stays pure and every change is saved automatically.
+- **Components:** They use named functions (addRecipe, updateRecipe, deleteRecipe) and never see the action shapes.
+- **createRecipe:** createRecipe runs before dispatching so the reducer stays pure and deterministic.
