@@ -1,5 +1,9 @@
 import { describe, expect, test } from "vitest";
-import { formatQuantity, formatIngredient } from "../../src/utils/format";
+import {
+  formatQuantity,
+  formatIngredient,
+  isSafeURL,
+} from "../../src/utils/format";
 
 describe("formatQuantity", () => {
   test.each([
@@ -25,5 +29,49 @@ describe("formatIngredient", () => {
     ],
   ])("formats %j as '%s'", (input, expected) => {
     expect(formatIngredient(input)).toBe(expected);
+  });
+});
+
+describe("isSafeURL", () => {
+  describe("safe links", () => {
+    test.each([
+      "https://example.com",
+      "http://example.com",
+      "https://example.com/path/to/recipe?id=1&lang=fi#ingredients",
+      "HTTPS://EXAMPLE.COM",
+    ])("accepts %j", (input) => {
+      expect(isSafeURL(input)).toBe(true);
+    });
+  });
+
+  describe("unsafe or unusable links", () => {
+    test.each([
+      // dangerous protocols
+      "javascript:alert(1)",
+      "JaVaScRiPt:alert(1)",
+      " javascript:alert(1)", // leading space
+      "java\tscript:alert(1)", // tab inside the protocol
+      "data:text/html,<script>alert(1)</script>",
+      // other protocols that aren't web pages
+      "ftp://example.com",
+      "mailto:someone@example.com",
+      // not a full URL
+      "example.com", // no protocol
+      "//example.com",
+      "https://",
+      "http//example.com",
+      // empty
+      "",
+      "   ",
+    ])("rejects %j", (input) => {
+      expect(isSafeURL(input)).toBe(false);
+    });
+
+    test.each([null, undefined, 42, {}, []])(
+      "rejects the non-string value %j",
+      (input) => {
+        expect(isSafeURL(input)).toBe(false);
+      },
+    );
   });
 });

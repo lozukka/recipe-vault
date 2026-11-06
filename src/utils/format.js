@@ -12,3 +12,14 @@ export const formatIngredient = ({ quantity, unit, name, note }) => {
 
   return note ? `${line} (${note})` : line;
 };
+
+export const isSafeURL = (input) => {
+  if (typeof input !== "string") return false;
+
+  try {
+    const { protocol } = new URL(input);
+    return protocol === "http:" || protocol === "https:";
+  } catch {
+    return false;
+  }
+};
