@@ -6,3 +6,9 @@ export const formatQuantity = (quantity) => {
 
   return formattedQuantity;
 };
+
+export const formatIngredient = ({ quantity, unit, name, note }) => {
+  const line = [formatQuantity(quantity), unit, name].filter(Boolean).join(" ");
+
+  return note ? `${line} (${note})` : line;
+};
