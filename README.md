@@ -37,7 +37,16 @@ A personal recipe manager that pulls your saved recipes from anywhere into one s
 
 ### Data model
 
-- **Recipe:** `{ id, title, sourceURL, mealsQty, ingredients, modifiedIngredients, tags, createdAt, lastCookedAt }`
+- **Recipe:** `{ id, title, sourceURL, sourceName, mealsQty, ingredients, modifiedIngredients, tags, createdAt, lastCookedAt }`
+- **Source:** `{sourceURL and sourceName}` SourceName records where a recipe comes from when there is no link.
+
+| sourceName | sourceURL      | Shown               |
+| ---------- | -------------- | ------------------- |
+| yes        | safe url       | the name as a link  |
+| yes        | unsafe or none | name as plain text  |
+| no         | safe url       | a generic link text |
+| no         | unsafe or none | nothing             |
+
 - **Ingredient:** `{ quantity, unit, name }`. Quantity and unit are optional, so "salt to taste" works. Quantity and unit are separate fields, so a grocery list can add amounts together later.
 - **Modified ingredient:** `{ quantity, unit, name, note }`, where `note` is optional. These are optional additions or swaps ("add bacon", "feta instead of cheese") kept on the same recipe, so there is one makaroonilaatikko and not three nearly identical ones.
 - **Missing optional values are `null`**, so every stored object has the same shape.

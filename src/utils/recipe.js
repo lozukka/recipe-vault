@@ -7,6 +7,7 @@
     id: crypto.randomUUID(),
     title: fields.title,
     sourceURL: fields.sourceURL,
+    sourceName: fields.sourceName,
     mealsQty: fields.mealsQty,
     ingredients: fields.ingredients, //[{quantity(optional), unit(optional), name*}],
     modifiedIngredients: fields.modifiedIngredients, //[{quantity(optional), unit(optional), name, note(optional)}],
