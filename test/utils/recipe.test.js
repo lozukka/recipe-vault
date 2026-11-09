@@ -91,6 +91,7 @@ describe("createRecipe", () => {
       const result = createRecipe({
         title: " Pasta ",
         sourceURL: null,
+        sourceName: null,
         mealsQty: 1,
         ingredients: [],
         modifiedIngredients: [],
@@ -100,6 +101,7 @@ describe("createRecipe", () => {
         id: expect.any(String),
         title: "Pasta",
         sourceURL: null,
+        sourceName: null,
         mealsQty: 1,
         ingredients: [],
         modifiedIngredients: [],
@@ -112,6 +114,7 @@ describe("createRecipe", () => {
       const result = createRecipe({
         title: " Pasta ",
         sourceURL: "Valio",
+        sourceName: "website",
         mealsQty: 3,
         ingredients: [{ quantity: 2, unit: "dl", name: "kermaa" }],
         modifiedIngredients: [
@@ -123,6 +126,7 @@ describe("createRecipe", () => {
         id: expect.any(String),
         title: "Pasta",
         sourceURL: "Valio",
+        sourceName: "website",
         mealsQty: 3,
         ingredients: [{ quantity: 2, unit: "dl", name: "kermaa" }],
         modifiedIngredients: [

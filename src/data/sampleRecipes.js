@@ -10,6 +10,7 @@ const makaroonilaatikko = createRecipe({
   title: "Makaroonilaatikko",
   sourceURL:
     "https://www.valio.fi/reseptit/liha-makaronilaatikko/?gclsrc=aw.ds&gad_source=1&gad_campaignid=76207099&gbraid=0AAAAADebTUvEP76pgfeKB9BmSze6jugSO&gclid=Cj0KCQiA77DXBhCHARIsAHf2MNpZz2PR4Esi9ghCJxs-apFoTuj5FqCSwfAlKB7ITtkuRlztOJpDoEcaAtcqEALw_wcB",
+  sourceName: "website",
   mealsQty: 4,
   ingredients: [
     { quantity: 300, unit: "g", name: "makaronia" },

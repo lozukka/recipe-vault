@@ -48,6 +48,7 @@ export const createRecipe = (fields) => {
     id: createID(),
     title: (fields.title || "").trim(),
     sourceURL: fields.sourceURL || null,
+    sourceName: fields.sourceName || null,
     mealsQty: fields.mealsQty ?? 1,
     ingredients: (fields.ingredients ?? []).map(createIngredient),
     modifiedIngredients: (fields.modifiedIngredients ?? []).map(
