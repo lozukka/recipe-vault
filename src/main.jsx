@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme.js";
 import { GlobalStyle } from "./styles/GlobalStyle.js";
-import RecipeListPage from "./pages/RecipeListPage.jsx";
+import { RecipeListPage } from "./pages/RecipeListPage.jsx";
 import RecipeFormPage from "./pages/RecipeFormPage.jsx";
 import RecipeDetailPage from "./pages/RecipeDetailPage.jsx";
 import { RecipesProvider } from "./context/RecipesProvider.jsx";
