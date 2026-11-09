@@ -114,7 +114,7 @@ describe("createRecipe", () => {
       const result = createRecipe({
         title: " Pasta ",
         sourceURL: "Valio",
-        sourceName: "website",
+        sourceName: "website ",
         mealsQty: 3,
         ingredients: [{ quantity: 2, unit: "dl", name: "kermaa" }],
         modifiedIngredients: [
