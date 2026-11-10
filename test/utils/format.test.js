@@ -3,6 +3,7 @@ import {
   formatQuantity,
   formatIngredient,
   isSafeURL,
+  formatDate,
 } from "../../src/utils/format";
 
 describe("formatQuantity", () => {
@@ -73,5 +74,18 @@ describe("isSafeURL", () => {
         expect(isSafeURL(input)).toBe(false);
       },
     );
+  });
+});
+
+describe("formatDate", () => {
+  test.each([
+    ["2026-11-09T12:00:00.000Z", "9.11.2026"],
+    ["2026-01-05T12:00:00.000Z", "5.1.2026"],
+    [null, ""],
+    [undefined, ""],
+    ["", ""],
+    ["not a date", ""],
+  ])("formats %j as '%s'", (input, expected) => {
+    expect(formatDate(input)).toBe(expected);
   });
 });

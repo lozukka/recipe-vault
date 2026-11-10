@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { strings } from "../strings";
+import { formatDate } from "../utils/format";
 
 export function RecipeCard({ recipe }) {
   return (
@@ -11,7 +12,10 @@ export function RecipeCard({ recipe }) {
         </p>
         {recipe.lastCookedAt && (
           <span>
-            {strings.meals.lastCookedAt} {recipe.lastCookedAt}
+            {strings.meals.lastCookedAt}{" "}
+            <time dateTime={recipe.lastCookedAt}>
+              {formatDate(recipe.lastCookedAt)}
+            </time>
           </span>
         )}
       </div>
