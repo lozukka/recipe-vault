@@ -5,9 +5,23 @@ export function RecipeCard({ recipe }) {
   return (
     <Link to={`/recipes/${recipe.id}`}>
       <h2>{recipe.title}</h2>
-      {/* TODO 1: the meals text, from strings.meals(recipe.mealsQty) */}
-      {/* TODO 2: the tags, each shown with a # in front.
-                  Render nothing at all if there are no tags. */}
+      <div>
+        <p>
+          {strings.meals.mealsQuantity} {recipe.mealsQty}
+        </p>
+        {recipe.lastCookedAt && (
+          <span>
+            {strings.meals.lastCookedAt} {recipe.lastCookedAt}
+          </span>
+        )}
+      </div>
+      {recipe.tags.length > 0 && (
+        <ul>
+          {recipe.tags.map((tag) => (
+            <li key={tag}>#{tag}</li>
+          ))}
+        </ul>
+      )}
     </Link>
   );
 }

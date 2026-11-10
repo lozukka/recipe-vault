@@ -12,4 +12,8 @@ export const strings = {
     notFound: "Reseptiä ei löytynyt",
     openSource: "Avaa lähde",
   },
+  meals: {
+    mealsQuantity: "Annoksia:",
+    lastCookedAt: "Tehty viimeksi:",
+  },
 };

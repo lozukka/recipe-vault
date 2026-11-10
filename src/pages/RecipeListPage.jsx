@@ -9,10 +9,17 @@ export function RecipeListPage() {
     <>
       <main>
         <h1>{strings.list.title}</h1>
-
-        {/* TODO 3: no recipes -> <p> with strings.list.empty.
-                  otherwise -> a <ul> with one <li key=...> per recipe,
-                  containing a RecipeCard. */}
+        {recipes.length === 0 ? (
+          <p>{strings.list.empty}</p>
+        ) : (
+          <ul>
+            {recipes.map((recipe) => (
+              <li key={recipe.id}>
+                <RecipeCard recipe={recipe} />
+              </li>
+            ))}
+          </ul>
+        )}
       </main>
     </>
   );

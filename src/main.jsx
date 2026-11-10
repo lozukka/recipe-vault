@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <RecipeListPage /> }, // homepage
       { path: "new", element: <RecipeFormPage /> }, // new recipe
-      { path: "id", element: <RecipeDetailPage /> }, //one recipe
+      { path: "recipes/:id", element: <RecipeDetailPage /> }, //one recipe
     ],
   },
 ]);
