@@ -137,5 +137,14 @@ describe("createRecipe", () => {
         lastCookedAt: null,
       });
     });
+
+    test("keeps a given lastCookedAt", () => {
+      const result = createRecipe({
+        title: "Pasta",
+        lastCookedAt: "2026-10-28T12:00:00.000Z",
+      });
+
+      expect(result.lastCookedAt).toBe("2026-10-28T12:00:00.000Z");
+    });
   });
 });

@@ -23,3 +23,10 @@ export const isSafeURL = (input) => {
     return false;
   }
 };
+
+export const formatDate = (isoString) => {
+  if (!isoString) return "";
+
+  const date = new Date(isoString);
+  return Number.isNaN(date.getTime()) ? "" : date.toLocaleDateString("fi-Fi");
+};

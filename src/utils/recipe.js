@@ -57,7 +57,7 @@ export const createRecipe = (fields) => {
     ),
     tags: fields.tags ?? [],
     createdAt: createTimestamp(),
-    lastCookedAt: null,
+    lastCookedAt: fields.lastCookedAt || null,
   };
 
   return newRecipe;

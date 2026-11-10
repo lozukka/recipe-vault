@@ -32,6 +32,7 @@ const makaroonilaatikko = createRecipe({
     },
   ],
   tags: ["arkiruoka", "uuni", "pasta"],
+  lastCookedAt: "2026-10-28T12:00:00.000Z",
 });
 
 // 2. A long title and a decimal quantity, to test layout
