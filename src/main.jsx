@@ -1,7 +1,11 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
-import { createBrowserRouter, RouterProvider } from "react-router";
+import {
+  BrowserRouter,
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme.js";
 import { GlobalStyle } from "./styles/GlobalStyle.js";
@@ -21,12 +25,14 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
 createRoot(document.getElementById("root")).render(
-  <ThemeProvider theme={theme}>
-    <StrictMode>
+  <StrictMode>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <RecipesProvider>
         <RouterProvider router={router} />
       </RecipesProvider>
-    </StrictMode>
-  </ThemeProvider>,
+    </ThemeProvider>
+  </StrictMode>,
 );

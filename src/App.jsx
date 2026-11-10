@@ -1,8 +1,9 @@
+import { Outlet } from "react-router";
 import { useRecipes } from "./hooks/useRecipes";
 import { sampleRecipes } from "./data/sampleRecipes";
 
 function App() {
-  const { recipes, addRecipe, updateRecipe, deleteRecipe } = useRecipes();
+  const { addRecipe } = useRecipes();
 
   return (
     <>
@@ -13,22 +14,7 @@ function App() {
           Load sample recipes
         </button>
       )}
-      <div>
-        <p>Recipes: {recipes.length}</p>
-        {recipes.map((recipe) => (
-          <li key={recipe.id}>
-            {recipe.title}{" "}
-            <button
-              onClick={() =>
-                updateRecipe({ ...recipe, title: `${recipe.title}!` })
-              }
-            >
-              Add !
-            </button>{" "}
-            <button onClick={() => deleteRecipe(recipe.id)}>Delete</button>
-          </li>
-        ))}
-      </div>
+      <Outlet />
     </>
   );
 }
