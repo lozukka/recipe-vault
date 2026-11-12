@@ -1,7 +1,19 @@
-function RecipeDetailPage() {
+import { strings } from "../strings";
+import { IngredientRow } from "../components/IngredientRow";
+
+function RecipeDetailPage(recipe) {
   return (
     <>
-      <p>Detail page coming soon</p>
+      <main>
+        <ul>
+          {recipe.ingredients.map((ingredient, index) => (
+            <IngredientRow
+              key={`${ingredient.name}-${index}`}
+              ingredient={ingredient}
+            />
+          ))}
+        </ul>
+      </main>
     </>
   );
 }
