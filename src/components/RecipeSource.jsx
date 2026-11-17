@@ -5,7 +5,7 @@ export function RecipeSource({ recipe }) {
   const { sourceName, sourceURL } = recipe;
   const hasLink = sourceURL && isSafeURL(sourceURL);
 
-  if (hasLink)
+  if (hasLink && sourceName)
     return (
       <a href={sourceURL} target="_blank" rel="noopener noreferrer">
         {sourceName}
@@ -14,7 +14,7 @@ export function RecipeSource({ recipe }) {
 
   if (sourceName) return <p>{sourceName}</p>;
 
-  if (sourceURL)
+  if (hasLink)
     return (
       <a href={sourceURL} target="_blank" rel="noopener noreferrer">
         {strings.detail.openSource}

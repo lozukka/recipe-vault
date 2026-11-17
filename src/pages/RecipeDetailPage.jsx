@@ -24,6 +24,10 @@ export function RecipeDetailPage() {
       <Link to="/">{strings.common.backToList}</Link>
       <h1>{recipe.title}</h1>
 
+      <p>
+        {strings.meals.mealsQuantity} {recipe.mealsQty}
+      </p>
+
       <RecipeSource recipe={recipe} />
       {recipe.lastCookedAt && (
         <p>
@@ -46,15 +50,17 @@ export function RecipeDetailPage() {
           />
         ))}
       </ul>
-      {recipe.modifiedIngredients && (
+      {recipe.modifiedIngredients.length > 0 && (
         <h2>{strings.detail.modifiedIngredients}</h2>
       )}
-      {recipe.modifiedIngredients.map((ingredient, index) => (
-        <IngredientRow
-          key={`${ingredient.name}-${index}`}
-          ingredient={ingredient}
-        />
-      ))}
+      <ul>
+        {recipe.modifiedIngredients.map((ingredient, index) => (
+          <IngredientRow
+            key={`${ingredient.name}-${index}`}
+            ingredient={ingredient}
+          />
+        ))}
+      </ul>
       {recipe.tags.length > 0 && (
         <ul>
           {recipe.tags.map((tag) => (
