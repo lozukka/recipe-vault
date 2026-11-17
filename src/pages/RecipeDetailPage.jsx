@@ -3,11 +3,11 @@ import { useRecipes } from "../hooks/useRecipes";
 import { IngredientRow } from "../components/IngredientRow";
 import { strings } from "../strings";
 
-export default function RecipeDetailPage() {
+export function RecipeDetailPage() {
   const { id } = useParams();
   const { recipes } = useRecipes();
 
-  const recipe = undefined;
+  const recipe = recipes.find((item) => item.id === id);
 
   if (!recipe) {
     return (
