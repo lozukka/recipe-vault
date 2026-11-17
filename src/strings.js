@@ -11,6 +11,7 @@ export const strings = {
     modifiedIngredients: "Muunnelmat",
     notFound: "Reseptiä ei löytynyt",
     openSource: "Avaa lähde",
+    createdAt: "Resepti lisätty:",
   },
   meals: {
     mealsQuantity: "Annoksia:",
