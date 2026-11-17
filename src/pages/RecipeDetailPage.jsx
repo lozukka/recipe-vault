@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router";
 import { useRecipes } from "../hooks/useRecipes";
 import { IngredientRow } from "../components/IngredientRow";
+import { RecipeSource } from "../components/RecipeSource";
 import { strings } from "../strings";
 
 export function RecipeDetailPage() {
@@ -21,6 +22,9 @@ export function RecipeDetailPage() {
     <main>
       <Link to="/">{strings.common.backToList}</Link>
       <h1>{recipe.title}</h1>
+
+      <RecipeSource recipe={recipe} />
+
       <ul>
         {recipe.ingredients.map((ingredient, index) => (
           <IngredientRow
